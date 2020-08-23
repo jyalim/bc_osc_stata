@@ -4,7 +4,7 @@
 [![GitHub License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 A Batch Connect app designed for OSC OnDemand that launches Stata within an
-Owens batch job.
+ASU Agave batch job. Forked from `github.com/OSC/bc_osc_stata`.
 
 ## Prerequisites
 
@@ -12,7 +12,7 @@ This Batch Connect app requires the following software be installed on the
 **compute nodes** that the batch job is intended to run on (**NOT** the
 OnDemand node):
 
-- [Stata] 15
+- [Stata] 16
 - [Xfce Desktop] 4+
 
 For VNC server support:

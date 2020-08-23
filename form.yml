@@ -1,47 +1,92 @@
 ---
-cluster: "owens"
+cluster: "agave"
 form:
+  - bc_partition
+  - bc_qos
+  - bc_core
+  - bc_time
   - version
-  - bc_account
-  - bc_num_hours
-  - bc_num_slots
-  - num_cores
-  - node_type
-  - bc_vnc_resolution
+  - bc_gres
+  - background_color
   - bc_email_on_started
+  - bc_vnc_resolution
+# - bc_node
 attributes:
-  num_cores:
+  bc_partition:
+    label: "Partition"
+    value: "serial"
+    help: |
+      - Specify a partition to run on, e.g. `serial` or `debug`. 
+      - Default is `serial`.
+      - **note**: The `debug` partition has a max walltime of 15 minutes.
+      - **note**: The `htc` partition has a max walltime of 4 hours.
+      - **Additional partition info**: http://bit.ly/RCnodes
+
+  bc_qos:
+    label: "QOS"
+    value: "normal"
+    help: |
+      Specify a QOS, e.g. `normal` or `wildfire`. Default is `normal`
+
+  bc_node:
+    label: "Number of Nodes"
+    value: 1
+
+  bc_core:
     widget: "number_field"
     label: "Number of cores"
     value: 1
+    min: 1
+    max: 256
     help: |
-      Number of cores on node type (4 GB per core unless requesting whole
-      node). Leave blank if requesting full node.
-    min: 0
-    max: 48
-    step: 1
-    id: 'num_cores'
-  bc_num_slots: "1"
+      Number of cores on node. Default 1 core. **Note** that this is not a
+      dynamic widget! Your choice of cores must reflect what is available on
+      the nodes within a your selected partition. _Additional partition info_:
+      http://bit.ly/RCnodes
+
+  bc_time:
+    label: "Job Wall Time"
+    value: "15"
+    help: |
+      - Set an upper limit on the run time of `Stata`. 
+      - Default is 15 minutes.
+      - **time formats**: "minutes", "minutes:seconds",
+        "hours:minutes:seconds", "days-hours", "days-hours:minutes",
+        "days-hours:minutes:seconds"
+
+  bc_gres:
+    label: "Generic RESources (GPUs)"
+    value: ""
+    help: |
+      - Request GRES here if needed (Generic RESources, usually GPUs, e.g.
+        `gpu:GTX1080:1` or just `gpu:1`)
+      - Default is blank
+      - Note that not all gpu nodes currently support this interactive
+        application! 
+
   bc_vnc_resolution:
     required: true
-  bc_account:
-    label: "Project"
-    help: "You can leave this blank if **not** in multiple projects."
-  node_type:
-    widget: select
-    label: "Node type"
-    help: |
-      - **any** - (*1-28 cores*) Use any available Owens node. This reduces the
-        wait time as there are no node requirements.
-      - **hugemem** - (*48 cores*) Use an Owens node that has 1.5TB of
-        available RAM as well as 48 cores. There are 16 of these nodes on
-        Owens. Requesting hugemem nodes allocates entire nodes.
-    options:
-      - [ "any",     ""            ]
-      - [ "hugemem", ":hugemem"    ]
+
   version:
     widget: select
     label: "Stata version"
-    help: "This defines the version of Stata you want to load."
+    help: "Select the version of Stata you want to load (default 16)."
     options:
-     - [ "15", "stata/15" ]
+      - [ "16", "stata/16" ]
+      - [ "14", "stata/14" ]
+
+  background_color:
+    widget: select
+    label: "Desktop Background Color"
+    help: |
+      - This defines the color of the solid desktop background. 
+      - The default is dark.
+      - Change the solid color at any time with the terminal command
+        `xsetroot` and an HTML color, e.g. for black
+        `xsetroot -solid "#000000"`.
+    value: "dark"
+    options:
+      - [   "dark", "#111111" ]
+      - [  "light", "#D1D1D1" ]
+      - [   "gold", "#FFC627" ]
+      - [ "maroon", "#8C1D40" ]

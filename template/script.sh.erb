@@ -18,7 +18,7 @@ cd "${HOME}"
   module restore
   set -x
   xfwm4 --compositor=off --daemon --sm-client-disable
-  xsetroot -solid "#D3D3D3"
+  xsetroot -solid "<%= context.background_color -%>"
   xfsettingsd --sm-client-disable
   xfce4-panel --sm-client-disable
 ) &
@@ -28,20 +28,12 @@ cd "${HOME}"
 #
 
 # Load the required enviornment
-module load stata
-# For reference:
-# 
-# whatis("loads stata")
-# help([[This module loads stata]])
-# setenv("OSC_STATA_DIR","/usr/local/stata/15")
-# prepend_path("PATH","/usr/local/stata/15")
-
-# Launch stata
+module load <%= context.version %>
+module list
 # note that xstata-mp doesn't block so we have to watch it
 xstata-mp
-
 # Get the PID of the last xstata-mp process started that I own
-stata_pid=$( pgrep -u "$USER" 'xstata-mp' | tail )
+stata_pid=$( pgrep -u "$USER" 'xstata-mp' | tail -1 )
 # As long as the PID directory exists we wait
 while [[ -d "/proc/$stata_pid" ]]; do
   sleep 1
