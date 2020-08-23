@@ -14,8 +14,8 @@ Summary:  SUMMARY
 
 Group:    System Environment/Daemons
 License:  MIT
-URL:      https://github.com/OSC/%{repo_name}
-Source0:  https://github.com/OSC/%{repo_name}/archive/%{git_tag}.tar.gz
+URL:      https://github.com/jyalim/%{repo_name}
+Source0:  https://github.com/jyalim/%{repo_name}/archive/%{git_tag}.tar.gz
 
 Requires: ondemand
 
