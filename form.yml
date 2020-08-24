@@ -37,12 +37,13 @@ attributes:
     label: "Number of cores"
     value: 1
     min: 1
-    max: 256
+    max: 4
     help: |
       Number of cores on node. Default 1 core. **Note** that this is not a
       dynamic widget! Your choice of cores must reflect what is available on
       the nodes within a your selected partition. _Additional partition info_:
       http://bit.ly/RCnodes
+      - **note**: Our current multiprocessing license for Stata 16 only supports up to four cores!
 
   bc_time:
     label: "Job Wall Time"
