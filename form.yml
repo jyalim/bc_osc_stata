@@ -71,8 +71,9 @@ attributes:
   version:
     widget: select
     label: "Stata version"
-    help: "Select the version of Stata you want to load (default 16)."
+    help: "Select the version of Stata you want to load (default 17)."
     options:
+      - [ "17", "stata/17" ]
       - [ "16", "stata/16" ]
       - [ "14", "stata/14" ]
 
